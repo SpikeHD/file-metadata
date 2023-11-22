@@ -11,4 +11,4 @@ sed -i -E "s%\"filename\":\"[^\"]+\"%\"filename\":\"${LIB_FILE}\"%g" ${META_PATH
 cp ./target/release/${LIB_FILE} ./ext/extensions/FileMetadata/
 
 # Compress the ext folder using deflate:fast to filename "FileMetadata.yymps"
-zip -r -9 -Z deflate:fast ${LIB_NAME_NO_EXT}.yymps ./ext/*
+zip -r -1 ${LIB_NAME_NO_EXT}.yymps ./ext/*
