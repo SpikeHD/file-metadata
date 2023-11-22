@@ -49,11 +49,15 @@ jobs:
 
       - name: Package
         if: matrix.platform != 'windows-latest'
-        run: chmod +x ./package.sh && LIB_FILE=target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }} ./package.sh
+        run: chmod +x ./package.sh && ./package.sh
+        env:
+          LIB_FILE: target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
 
       - name: Package
         if: matrix.platform == 'windows-latest'
-        run: LIB_FILE=target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}.exe ./package.sh
+        run: ./package.ps1
+        env:
+          LIB_FILE: target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
