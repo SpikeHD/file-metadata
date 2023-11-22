@@ -10,7 +10,7 @@ pub fn log_and_return(e: impl std::fmt::Display) -> f64 {
 }
 
 #[no_mangle]
-pub extern fn file_creation_date(path: *const i8) -> f64 {
+pub unsafe extern "C" fn file_creation_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,
@@ -27,11 +27,14 @@ pub extern fn file_creation_date(path: *const i8) -> f64 {
     Err(e) => return log_and_return(e),
   };
 
-  creation_time.duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_secs() as f64
+  creation_time
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap_or_default()
+    .as_secs() as f64
 }
 
 #[no_mangle]
-pub extern fn file_modification_date(path: *const i8) -> f64 {
+pub unsafe extern "C" fn file_modification_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,
@@ -48,11 +51,14 @@ pub extern fn file_modification_date(path: *const i8) -> f64 {
     Err(e) => return log_and_return(e),
   };
 
-  modification_time.duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_secs() as f64
+  modification_time
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap_or_default()
+    .as_secs() as f64
 }
 
 #[no_mangle]
-pub extern fn file_access_date(path: *const i8) -> f64 {
+pub unsafe extern "C" fn file_access_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,
@@ -69,11 +75,14 @@ pub extern fn file_access_date(path: *const i8) -> f64 {
     Err(e) => return log_and_return(e),
   };
 
-  access_time.duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_secs() as f64
+  access_time
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap_or_default()
+    .as_secs() as f64
 }
 
 #[no_mangle]
-pub extern fn file_size(path: *const i8) -> f64 {
+pub unsafe extern "C" fn file_size(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,
@@ -89,7 +98,7 @@ pub extern fn file_size(path: *const i8) -> f64 {
 }
 
 #[no_mangle]
-pub extern fn file_exists(path: *const i8) -> bool {
+pub unsafe extern "C" fn file_exists(path: *const i8) -> bool {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,
@@ -97,12 +106,12 @@ pub extern fn file_exists(path: *const i8) -> bool {
   };
 
   let metadata = get_file_metadata(path);
-  
+
   metadata.is_ok()
 }
 
 #[no_mangle]
-pub extern fn file_is_directory(path: *const i8) -> bool {
+pub unsafe extern "C" fn file_is_directory(path: *const i8) -> bool {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
   let path = match std::str::from_utf8(path) {
     Ok(v) => v,

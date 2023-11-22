@@ -51,22 +51,22 @@ jobs:
       - name: Build
         run: cargo build --release
 
-      - name: Package
-        if: matrix.platform != 'windows-latest'
-        run: chmod +x ./package.sh && ./package.sh
-        env:
-          LIB_FILE: ${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
+      # - name: Package
+      #   if: matrix.platform != 'windows-latest'
+      #   run: chmod +x ./package.sh && ./package.sh
+      #   env:
+      #     LIB_FILE: ${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
 
-      - name: Package
-        if: matrix.platform == 'windows-latest'
-        run: ./package.ps1
-        env:
-          LIB_FILE: ${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
+      # - name: Package
+      #   if: matrix.platform == 'windows-latest'
+      #   run: ./package.ps1
+      #   env:
+      #     LIB_FILE: ${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: lib-${{ matrix.platform }}
           # Find exec based on platform
-          path: FileMetadata.*
+          path: ${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
           
