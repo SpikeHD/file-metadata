@@ -54,9 +54,13 @@ jobs:
 
       # Run test/test.c
       - name: Run
-        if: matrix.platform != 'windows-latest'
+        if: matrix.platform == 'macos-latest'
         run: ./test/testlib
 
       - name: Run
+        if: matrix.platform == 'ubuntu-latest'
+        run: LD_LIBRARY_PATH=target/release ./test/testlib
+
+      - name: Run
         if: matrix.platform == 'windows-latest'
-        run: test\testlib
+        run: .\test\testlib.exe
