@@ -47,14 +47,18 @@ jobs:
       - name: Build
         run: cargo build --release
 
-      - name: Set path env var
-        env:
-          lib_path: target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
+      - name: Package
+        if: matrix.platform != 'windows-latest'
+        run: chmod +x ./package.sh && LIB_FILE=target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }} ./package.sh
+
+      - name: Package
+        if: matrix.platform == 'windows-latest'
+        run: LIB_FILE=target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}.exe ./package.sh
 
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: lib-${{ matrix.platform }}
           # Find exec based on platform
-          path: target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
+          path: FileMetadata.*
           
