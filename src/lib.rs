@@ -9,6 +9,14 @@ pub fn log_and_return(e: impl std::fmt::Display) -> f64 {
   -1.0
 }
 
+/**
+ * Returns the creation date of the file at the given path.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_creation_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
@@ -33,6 +41,14 @@ pub unsafe extern "C" fn file_creation_date(path: *const i8) -> f64 {
     .as_secs() as f64
 }
 
+/**
+ * Returns the modification date of the file at the given path.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_modification_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
@@ -57,6 +73,14 @@ pub unsafe extern "C" fn file_modification_date(path: *const i8) -> f64 {
     .as_secs() as f64
 }
 
+/**
+ * Returns the access date of the file at the given path.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_access_date(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
@@ -81,6 +105,14 @@ pub unsafe extern "C" fn file_access_date(path: *const i8) -> f64 {
     .as_secs() as f64
 }
 
+/**
+ * Returns the size of the file at the given path.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_size(path: *const i8) -> f64 {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
@@ -97,6 +129,14 @@ pub unsafe extern "C" fn file_size(path: *const i8) -> f64 {
   metadata.len() as f64
 }
 
+/**
+ * Returns whether or not the file at the given path exists.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_exists(path: *const i8) -> bool {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
@@ -110,6 +150,14 @@ pub unsafe extern "C" fn file_exists(path: *const i8) -> bool {
   metadata.is_ok()
 }
 
+/**
+ * Returns whether or not the file at the given path is a directory.
+ * 
+ * # Safety
+ * 
+ * This function is unsafe because it takes a raw pointer as an argument. GML is responsible for
+ * ensuring that the pointer is valid and that the string it points to is valid UTF-8.
+ */
 #[no_mangle]
 pub unsafe extern "C" fn file_is_directory(path: *const i8) -> bool {
   let path = unsafe { std::ffi::CStr::from_ptr(path).to_bytes() };
