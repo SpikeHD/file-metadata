@@ -24,37 +24,35 @@ const char *get_file() {
 }
 
 int main() {
-    const char *path = get_file();
-
     // Test file_creation_date
-    double creation_date = file_creation_date(path);
+    double creation_date = file_creation_date(get_file());
     printf("File Creation Date: %f\n", creation_date);
     assert(creation_date > 0.0); // Assuming a positive creation time on success
 
     // Test file_modification_date
-    double modification_date = file_modification_date(path);
+    double modification_date = file_modification_date(get_file());
     printf("File Modification Date: %f\n", modification_date);
     assert(modification_date > 0.0); // Assuming a positive modification time on success
 
     // Test file_access_date
-    double access_date = file_access_date(path);
+    double access_date = file_access_date(get_file());
     printf("File Access Date: %f\n", access_date);
     assert(access_date > 0.0); // Assuming a positive access time on success
 
     // Test file_size
-    double size = file_size(path);
+    double size = file_size(get_file());
     printf("File Size: %f\n", size);
     assert(size >= 0.0); // Assuming a non-negative file size on success
 
     // Test file_exists
-    bool exists = file_exists(path);
+    bool exists = file_exists(get_file());
     printf("File Exists: %s\n", exists ? "true" : "false");
     assert(exists);
 
     // Test file_is_directory
-    bool is_directory = file_is_directory(path);
+    bool is_directory = file_is_directory(get_file());
     printf("Is Directory: %s\n", is_directory ? "true" : "false");
-    assert(is_directory);
+    assert(!is_directory);
 
     printf("All tests passed!\n");
 
