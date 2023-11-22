@@ -29,6 +29,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      # Build the library
+      - name: Build
+        run: cargo build --release
+
       # Build test/test.c
       - name: Build
         run: gcc -o test/testlib test/test.c -L target/release -lfile_metadata
