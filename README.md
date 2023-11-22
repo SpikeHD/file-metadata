@@ -16,7 +16,7 @@ Tiny baby library for getting file metadata. Originally written to work for a Ga
 # Installation
 
 1. Download the `.yymps` file from the [latest release](https://github.com/SpikeHD/file-metadata/releases/latest).
-2s. That's it! You can now import the package into your project by dragging it into your GameMaker window.
+2. That's it! You can now import the package into your project by dragging it into your GameMaker window.
 
 ## Alternative Installation
 You can also use the dynamic library itself by extracting the `.yymps` file as a zip file, and adding the `.dll`/`.dylib`/`.so` file found within to your project manually by following [this guide](https://forum.gamemaker.io/index.php?threads/basic-extension-creation.42662/) (skip the bits about Visual Studio and such).
