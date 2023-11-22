@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    paths:
+      - '.github/workflows/build.yml'
+      - 'src/**/*'
+      - 'Cargo.toml'
+  pull_request:
+    paths:
+      - '.github/workflows/build.yml'
+      - 'src/**/*'
+      - 'Cargo.toml'
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [windows-latest, ubuntu-latest, macos-latest]
+
+    # Setup
+    steps:
+      - uses: actions/checkout@v2
+
+      # Build test/test.c
+      - name: Build
+        run: gcc -o test/testlib test/test.c -L target/release -lfile_metadata
+
+      # Run test/test.c
+      - name: Run
+        run: ./test/testlib
