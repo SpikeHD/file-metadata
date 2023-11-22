@@ -52,5 +52,5 @@ jobs:
         with:
           name: lib-${{ matrix.platform }}
           # Find exec based on platform
-          path: target/release/${{ matrix.platform != 'windows-latest' && 'lib' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
+          path: target/release/${{ matrix.platform != 'windows-latest' && 'lib' || '' }}file_metadata${{ matrix.platform == 'windows-latest' && '.dll' || matrix.platform == 'macos-latest' && '.dylib' || '.so' }}
           
