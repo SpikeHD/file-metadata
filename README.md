@@ -15,9 +15,8 @@ Tiny baby library for getting file metadata. Originally written to work for a Ga
 
 # Installation
 
-1. Download the latest package version for your target platform from [Actions](https://github.com/SpikeHD/file-metadata/actions).
-2. Extract the `.yymps` file from the archive.
-3. That's it! You can now import the package into your project.
+1. Download the `.yymps` file from the [latest release](https://github.com/SpikeHD/file-metadata/releases/latest).
+3. That's it! You can now import the package into your project by dragging it into your GameMaker window.
 
 ## Alternative Installation
 You can also use the dynamic library itself by extracting the `.yymps` file as a zip file, and adding the `.dll`/`.dylib`/`.so` file found within to your project manually by following [this guide](https://forum.gamemaker.io/index.php?threads/basic-extension-creation.42662/) (skip the bits about Visual Studio and such).
@@ -28,7 +27,7 @@ You can also use the dynamic library itself by extracting the `.yymps` file as a
 
 * If a function encounters an error, it will return -1.0 and log to stderr.
 * Timestamps are in seconds, not milliseconds.
-* Internally, functions are prefixed with `file_` rather than `filemeta_`.
+* Internally, functions are prefixed with `file_` rather than `filemeta_`, so if you are using the [alternative installation](#alternative-installation) method, the mapping is `filemeta_creation_date` -> `file_creation_date`, etc.
 
 ## `filemeta_creation_date(path)`
 
