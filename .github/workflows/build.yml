@@ -6,11 +6,15 @@ on:
       - '.github/workflows/build.yml'
       - 'src/**/*'
       - 'Cargo.toml'
+      - 'package.sh'
+      - 'package.ps1'
   pull_request:
     paths:
       - '.github/workflows/build.yml'
       - 'src/**/*'
       - 'Cargo.toml'
+      - 'package.sh'
+      - 'package.ps1'
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
