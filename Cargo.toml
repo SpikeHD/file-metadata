@@ -1,5 +1,5 @@
 [package]
-name = "gml-file-metadata"
+name = "file-metadata"
 version = "0.1.0"
 edition = "2021"
 
