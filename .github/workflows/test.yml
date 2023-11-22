@@ -3,12 +3,12 @@ name: Build
 on:
   push:
     paths:
-      - '.github/workflows/build.yml'
+      - '.github/workflows/test.yml'
       - 'src/**/*'
       - 'Cargo.toml'
   pull_request:
     paths:
-      - '.github/workflows/build.yml'
+      - '.github/workflows/test.yml'
       - 'src/**/*'
       - 'Cargo.toml'
 
