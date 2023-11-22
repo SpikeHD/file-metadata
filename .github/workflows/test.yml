@@ -49,9 +49,14 @@ jobs:
         run: cargo build --release
 
       # Build test/test.c
-      - name: Build
+      - name: Build test
         run: gcc -o test/testlib test/test.c -L target/release -lfile_metadata
 
       # Run test/test.c
       - name: Run
+        if: matrix.platform != 'windows-latest'
         run: ./test/testlib
+
+      - name: Run
+        if: matrix.platform == 'windows-latest'
+        run: test\testlib
