@@ -63,4 +63,4 @@ jobs:
 
       - name: Run
         if: matrix.platform == 'windows-latest'
-        run: .\test\testlib.exe
+        run: move target\release\file_metadata.dll file_metadata.dll && test\testlib.exe

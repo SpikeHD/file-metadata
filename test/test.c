@@ -1,8 +1,18 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
-#include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
+
+// Include winbase on Windows
+#include <stdio.h>  /* defines FILENAME_MAX */
+#ifdef _WIN32
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
 
 // Function prototypes for Rust functions
 extern double file_creation_date(const char *path);
@@ -15,15 +25,21 @@ extern bool file_is_directory(const char *path);
 // Function to create a temporary file for testing
 const char *get_file() {
   // Get the current dir and append the Cargo.toml file name
-  char cwd[1024];
-  getcwd(cwd, sizeof(cwd));
-  char *path = strcat(cwd, "/Cargo.toml");
+  char *cwd = getcwd(NULL, 0);
+  char* result = malloc(strlen(cwd) + strlen("/Cargo.toml") + 1);
+  
+  strcpy(result, cwd);
+  strcat(result, "/Cargo.toml");
+
+  free(cwd);
 
   // Return the full path
-  return path;
+  return result;
 }
 
 int main() {
+    printf("Testing with file: %s\n", get_file());
+
     // Test file_creation_date
     double creation_date = file_creation_date(get_file());
     printf("File Creation Date: %f\n", creation_date);
