@@ -1,6 +1,12 @@
 # File Metadata
 Baby lib for getting file metadata. Originally written to work for a GameMaker game a friend is creating.
 
+# Installation
+
+1. Download the latest package version for your target platform from [Actions](https://github.com/SpikeHD/file-metadata/actions).
+2. Extract the `.yymps` file from the archive.
+3. That's it! You can now import the package into your project. 
+
 # Documentation
 
 ## `file_creation_date(path)`
