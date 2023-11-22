@@ -8,7 +8,7 @@ Baby lib for getting file metadata. Originally written to work for a GameMaker g
 3. That's it! You can now import the package into your project.
 
 ## Alternative Installation
-You can also use the dynamic library itself by extracting the `.yymps` file as a zip file, and adding the `.dll`/`.dylib`/`.so` file found within to your poject manually, by following [this guide](https://forum.gamemaker.io/index.php?threads/basic-extension-creation.42662/) (skip the bits about Visual Studio and such).
+You can also use the dynamic library itself by extracting the `.yymps` file as a zip file, and adding the `.dll`/`.dylib`/`.so` file found within to your project manually by following [this guide](https://forum.gamemaker.io/index.php?threads/basic-extension-creation.42662/) (skip the bits about Visual Studio and such).
 
 # Documentation
 
